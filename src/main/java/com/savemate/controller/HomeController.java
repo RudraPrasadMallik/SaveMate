@@ -31,4 +31,12 @@ public class HomeController {
     public List<Section> getAllSections() {
         return homeService.getAllSections();
     }
+    
+//    public Map<String, Object> getHomePage() {
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("ads", homeService.getAllAds());
+//        response.put("sections", homeService.getAllSections());
+//        return response;
+//    }
+    
 }

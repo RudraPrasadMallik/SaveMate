@@ -15,4 +15,7 @@ public class Advertisement {
 
     private String imageUrl;
     private String redirectUrl;
+
+    @Column(nullable = false)
+    private boolean status;
 }
