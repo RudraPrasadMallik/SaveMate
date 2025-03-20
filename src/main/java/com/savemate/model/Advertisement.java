@@ -18,4 +18,5 @@ public class Advertisement {
 
     @Column(nullable = false)
     private boolean status;
+    
 }
