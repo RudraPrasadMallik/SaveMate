@@ -139,14 +139,13 @@
     <scope>runtime</scope>
 </dependency>
 
-<!-- 
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-config-server</artifactId>
-    <version>4.1.0</version>  
+    <version>4.1.0</version>  <!-- Ensure this is correct -->
 </dependency>
 
--->
+
 
 
 </dependencies>
