@@ -16,10 +16,7 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
     
-    @GetMapping
-    public String check() {
-    	return "This is Home";
-    }
+   
 
     // ✅ Fetch all advertisements
     @GetMapping("/ads")

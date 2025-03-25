@@ -36,7 +36,7 @@ public class AdminController {
 
     // ================== Advertisement APIs ====================
 
-    @PostMapping("/ads")
+    @PostMapping("/createads")
     public Advertisement createAd(@RequestBody Advertisement ad) {
         return adminService.saveAd(ad);
     }
@@ -47,34 +47,38 @@ public class AdminController {
         return adminService.getAllAds();
     }
 
-    @PutMapping("/ads/{id}")
+    @PutMapping("/updateads/{id}")
     public Advertisement updateAd(@PathVariable Long id, @RequestBody Advertisement adDetails) {
         return adminService.updateAd(id, adDetails);
     }
 
-    @DeleteMapping("/ads/{id}")
+    @DeleteMapping("/deleteads/{id}")
     public String deleteAd(@PathVariable Long id) {
         return adminService.deleteAd(id);
     }
 
     // ================== Section APIs ==================
 
-    @PostMapping("/sections")
+    @PostMapping("/createsections")
     public Section createSection(@RequestBody Section section) {
-        return adminService.saveSection(section);
+        System.out.println("Received Section Request: " + section);
+        Section savedSection = adminService.saveSection(section);
+        System.out.println("Saved Section: " + savedSection);
+        return savedSection;
     }
+
 
     @GetMapping("/sections")
     public List<Section> getAllSections() {
         return adminService.getAllSections();
     }
 
-    @PutMapping("/sections/{id}")
+    @PutMapping("/updatesections/{id}")
     public Section updateSection(@PathVariable Long id, @RequestBody Section sectionDetails) {
         return adminService.updateSection(id, sectionDetails);
     }
 
-    @DeleteMapping("/sections/{id}")
+    @DeleteMapping("/deletesections/{id}")
     public String deleteSection(@PathVariable Long id) {
         return adminService.deleteSection(id);
     }
