@@ -14,6 +14,9 @@ public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+     @Column(unique = true)
+    private String imgUrl;
 
     @Column(nullable = false, unique = true)
     private String title;
@@ -28,12 +31,12 @@ public class Coupon {
     private String slug;
 
     // SEO Fields
-    @Column(nullable = false)
+    @Column
     private String seoTitle;
 
-    @Column(nullable = false)
+    @Column
     private String seoDescription;
 
-    @Column(nullable = false)
+    @Column
     private String seoKeywords;
 }

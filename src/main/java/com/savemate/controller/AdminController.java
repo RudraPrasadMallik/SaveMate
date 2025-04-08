@@ -3,8 +3,10 @@ package com.savemate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.savemate.model.Advertisement;
+import com.savemate.model.Coupon;
 import com.savemate.model.Section;
+import com.savemate.repository.CouponRepository;
 import com.savemate.service.AdminService;
-
+import com.savemate.service.CouponService;
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+	
 	
 	@GetMapping("/debug")
 	public String debugAuth() {
@@ -33,6 +39,7 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    
 
     // ================== Advertisement APIs ====================
 
@@ -82,4 +89,14 @@ public class AdminController {
     public String deleteSection(@PathVariable Long id) {
         return adminService.deleteSection(id);
     }
+    
+    
+ // ================== Section APIs ==================
+    
+    @PostMapping("/createcoupons")
+    public ResponseEntity<Coupon> createCoupon(@RequestBody Coupon coupon) {
+        Coupon savedCoupon = adminService.saveCoupon(coupon);
+        return ResponseEntity.ok(savedCoupon);
+    } 
+    
 }

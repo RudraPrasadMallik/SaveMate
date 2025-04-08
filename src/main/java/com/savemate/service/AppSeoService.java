@@ -2,7 +2,6 @@ package com.savemate.service;
 
 import com.savemate.model.AppSeo;
 import com.savemate.repository.AppSeoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,8 +9,11 @@ import java.util.Optional;
 @Service
 public class AppSeoService {
 
-    @Autowired
-    private AppSeoRepository seoRepository;
+    private final AppSeoRepository seoRepository;
+
+    public AppSeoService(AppSeoRepository seoRepository) {
+        this.seoRepository = seoRepository;
+    }
 
     public AppSeo getSeoByPage(String pageName) {
         return seoRepository.findByPageName(pageName)
