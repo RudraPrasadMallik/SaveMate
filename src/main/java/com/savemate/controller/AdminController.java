@@ -1,8 +1,12 @@
 package com.savemate.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,9 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.savemate.model.Advertisement;
 import com.savemate.model.Coupon;
 import com.savemate.model.Section;
-import com.savemate.repository.CouponRepository;
 import com.savemate.service.AdminService;
-import com.savemate.service.CouponService;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/admin")
@@ -94,9 +96,18 @@ public class AdminController {
  // ================== Section APIs ==================
     
     @PostMapping("/createcoupons")
-    public ResponseEntity<Coupon> createCoupon(@RequestBody Coupon coupon) {
-        Coupon savedCoupon = adminService.saveCoupon(coupon);
-        return ResponseEntity.ok(savedCoupon);
-    } 
-    
+    public ResponseEntity<?> createCoupon(@RequestBody Coupon coupon) {
+        try {
+            Coupon savedCoupon = adminService.saveCoupon(coupon);
+            return ResponseEntity.ok(savedCoupon);
+        } catch (DataIntegrityViolationException ex) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Coupon with this title or slug already exists.");
+            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Something went wrong while saving the coupon.");
+            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

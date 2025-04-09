@@ -15,19 +15,21 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-     @Column(unique = true)
+     @Column
     private String imgUrl;
+    @Column
+    private String type;
 
     @Column(nullable = false, unique = true)
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String description;
 
-    @Column(nullable = false)
+    @Column
     private String discountCode;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String slug;
 
     // SEO Fields

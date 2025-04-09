@@ -42,6 +42,7 @@ public class SecurityConfig {
                      "/swagger-ui.html",
             		"/home/**",
             		"/seo/**",
+            		"/ads/home",
             		"/admin/auth/login").permitAll() 
              // ✅ Restrict admin APIs
             .anyRequest().authenticated()
