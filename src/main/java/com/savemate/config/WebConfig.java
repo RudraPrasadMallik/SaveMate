@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -14,14 +13,18 @@ public class WebConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-    	 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-         CorsConfiguration config = new CorsConfiguration();
-         config.setAllowCredentials(true);
-         config.setAllowedOrigins(Arrays.asList("*"));  // ✅ Allow frontend origin
-         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-         source.registerCorsConfiguration("/**", config);
-         return new CorsFilter(source);
-     }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000",
+        		                      "https://savemateadmin.netlify.app",
+        		                      "http://savemateadmin.netlify.app"
+        		                      + ""));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
-
+}
