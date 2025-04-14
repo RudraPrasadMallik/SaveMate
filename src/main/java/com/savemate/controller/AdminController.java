@@ -24,7 +24,9 @@ import com.savemate.model.Advertisement;
 import com.savemate.model.Coupon;
 import com.savemate.model.Section;
 import com.savemate.service.AdminService;
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000",
+		"https://savemateadmin.netlify.app",
+		"http://savemateadmin.netlify.app"})
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
