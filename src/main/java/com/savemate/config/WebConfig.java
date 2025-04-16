@@ -19,7 +19,8 @@ public class WebConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Arrays.asList("http://localhost:3000",
         		                      "https://savemateadmin.netlify.app",
-        		                      "http://savemateadmin.netlify.app"
+        		                      "http://savemateadmin.netlify.app",
+        		                      "https://savemateapp.onrender.com"
         		                      + ""));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
