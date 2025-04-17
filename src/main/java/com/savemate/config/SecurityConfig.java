@@ -62,16 +62,31 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
+    
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://savemateapp.onrender.com"));  // ✅ Allow frontend
+
+        // Allow your frontend domains here
+        configuration.setAllowedOriginPatterns(List.of(
+            "https://*.onrender.com",
+            "https://savemateapp.onrender.com",
+            "https://savemateadmin.netlify.app",
+            "http://savemateadmin.netlify.app",
+            "http://localhost:3000"
+        ));
+        
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(List.of("*")); // allow all headers
+        configuration.setExposedHeaders(List.of("Authorization")); // Optional if you're sending token in headers
+        configuration.setAllowCredentials(true); // Required if sending cookies or Authorization header
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
+    
+    
 }
