@@ -3,6 +3,7 @@ package com.savemate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,12 +35,14 @@ public class HomeController {
    
     // ✅ Fetch all advertisements
     @GetMapping("/ads")
+    @CrossOrigin(origins = "https://savemateapp.onrender.com")
     public List<Advertisement> getAllAds() {
         return   homeService.getAllAds();
     }
 
     // ✅ Fetch all sections
     @GetMapping("/sections")
+    @CrossOrigin(origins = "https://savemateapp.onrender.com")
     public List<Section> getAllSections() {
         return homeService.getAllSections();
     }
@@ -47,6 +50,7 @@ public class HomeController {
     
     
     @GetMapping("/coupons")
+    @CrossOrigin(origins = "https://savemateapp.onrender.com")
     public List<Coupon> getAllCoupons() {
         return couponService.getAllCoupons();
     }
@@ -55,11 +59,13 @@ public class HomeController {
     
 //    Get coupon & Merchant from customers
     @PostMapping("/submitcoupon")
+    @CrossOrigin(origins = "https://savemateapp.onrender.com")
     public SubmitCoupon submitCoupon(@RequestBody SubmitCoupon sc) {
 		return homeService.getCouponCust(sc);
     	
     }
     @PostMapping("/submitmerchant")
+    @CrossOrigin(origins = "https://savemateapp.onrender.com")
     public SubmitMerchant submitMrechant(@RequestBody SubmitMerchant sm) {
 		return homeService.getMerchantCust(sm);
     	
