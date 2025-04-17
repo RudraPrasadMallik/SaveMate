@@ -13,7 +13,7 @@ public class WebConfig {
 
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+       
         CorsConfiguration config = new CorsConfiguration();
         
         config.setAllowCredentials(true);
@@ -21,10 +21,12 @@ public class WebConfig {
         		                      "https://savemateadmin.netlify.app",
         		                      "http://savemateadmin.netlify.app",
         		                      "http://localhost:3000"
-        		                      + ""));
+        		                        ));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        
+        config.addAllowedHeader("*");
+
+     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
