@@ -17,10 +17,10 @@ public class WebConfig {
         CorsConfiguration config = new CorsConfiguration();
         
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000",
+        config.setAllowedOrigins(Arrays.asList("https://savemateapp.onrender.com",
         		                      "https://savemateadmin.netlify.app",
         		                      "http://savemateadmin.netlify.app",
-        		                      "https://savemateapp.onrender.com"
+        		                      "http://localhost:3000"
         		                      + ""));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
