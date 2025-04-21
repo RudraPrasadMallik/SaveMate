@@ -74,8 +74,8 @@ public class SecurityConfig {
             "https://savemateapp.onrender.com",
             "https://savemateadmin.netlify.app",
             "http://savemateadmin.netlify.app",
-            "http://localhost:3000/*",
-            ""
+            "http://localhost:3000/"
+            
         ));
         
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
