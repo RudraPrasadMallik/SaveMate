@@ -71,8 +71,7 @@ public class SecurityConfig {
         // Allow your frontend domains here
         configuration.setAllowedOriginPatterns(List.of(
             "https://savemateapp.onrender.com",
-            "https://savemateadmin.netlify.app",
-            "http://savemateadmin.netlify.app",
+            "https://savemate-admin.onrender.com",
             "http://localhost:3000"
             
         ));
