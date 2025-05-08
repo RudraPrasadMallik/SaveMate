@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +23,8 @@ import com.savemate.model.Advertisement;
 import com.savemate.model.Coupon;
 import com.savemate.model.Section;
 import com.savemate.service.AdminService;
-@CrossOrigin(origins = {"http://localhost:3000",
-		"https://savemateadmin.netlify.app",
-		"http://savemateadmin.netlify.app"})
+import com.savemate.service.CouponService;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -43,6 +41,8 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private CouponService couponService;
     
 
     // ================== Advertisement APIs ====================
@@ -95,7 +95,7 @@ public class AdminController {
     }
     
     
- // ================== Section APIs ==================
+ // ================== Coupons APIs ==================
     
     @PostMapping("/createcoupons")
     public ResponseEntity<?> createCoupon(@RequestBody Coupon coupon) {
@@ -112,4 +112,23 @@ public class AdminController {
             return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    
+    @DeleteMapping("/deleteCoupon/{id}")
+    public ResponseEntity<String> deleteCoupon(@PathVariable Long id){
+    	try {
+    		couponService.deleteCoupon(id);
+    		return ResponseEntity.ok("Coupon has been deleted sucessfully");
+    	}
+    	 catch (RuntimeException e) {
+             return ResponseEntity.status(404).body(e.getMessage());
+         }
+    }
+    
+    @GetMapping("/getcoupons")
+    public ResponseEntity<List<Coupon>> getAllCoupons() {
+        List<Coupon> coupons = couponService.getAllCoupons();
+        return ResponseEntity.ok(coupons);
+    }
+    
 }

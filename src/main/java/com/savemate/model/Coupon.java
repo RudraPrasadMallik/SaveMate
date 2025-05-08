@@ -15,12 +15,12 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-     @Column
+    @Column
     private String imgUrl;
     @Column
     private String type;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String title;
 
     @Column

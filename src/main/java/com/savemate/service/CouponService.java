@@ -27,4 +27,15 @@ public class CouponService {
             return couponRepository.save(coupon);
         }).orElseThrow(() -> new RuntimeException("Coupon not found!"));
     }
+    
+    public void deleteCoupon(Long id) {
+    	if(!couponRepository.existsById(id) ) {
+    		throw new RuntimeException("coupon not found !");
+    	}
+    	couponRepository.deleteById(id);
+    			
+    }
+    
+
+    
 }
