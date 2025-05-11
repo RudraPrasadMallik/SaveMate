@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.savemate.model.Advertisement;
 import com.savemate.model.Coupon;
+import com.savemate.model.Deals;
 import com.savemate.model.Section;
 import com.savemate.service.AdminService;
 import com.savemate.service.CouponService;
+import com.savemate.service.DealsService;
 
 @RestController
 @RequestMapping("/admin")
@@ -43,6 +44,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private CouponService couponService;
+    
+    private DealsService dealsService;
     
 
     // ================== Advertisement APIs ====================
@@ -102,11 +105,13 @@ public class AdminController {
         try {
             Coupon savedCoupon = adminService.saveCoupon(coupon);
             return ResponseEntity.ok(savedCoupon);
-        } catch (DataIntegrityViolationException ex) {
-            Map<String, String> error = new HashMap<>();
-            error.put("message", "Coupon with this title or slug already exists.");
-            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-        } catch (Exception e) {
+       }
+        //catch (DataIntegrityViolationException ex) {
+//            Map<String, String> error = new HashMap<>();
+//            error.put("message", "Coupon with this title or slug already exists.");
+//            return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+//        } 
+        catch (Exception e) {
             Map<String, String> error = new HashMap<>();
             error.put("message", "Something went wrong while saving the coupon.");
             return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -130,5 +135,27 @@ public class AdminController {
         List<Coupon> coupons = couponService.getAllCoupons();
         return ResponseEntity.ok(coupons);
     }
+    
+    //====================== Deals Api ==========================
+    
+    @GetMapping("/getdeals")
+    public ResponseEntity<List<Deals>> getAllDeals(){
+    	List<Deals> deals = dealsService.getAllDeals();
+    	return ResponseEntity.ok(deals);
+    }
+    
+//    @PostMapping("/createcoupons")
+//    public ResponseEntity<?> createDeals(@RequestBody Deals deals) {
+//        try {
+//         //   Deals savedCoupon = dealsService.saveCoupon(deals);
+//            return ResponseEntity.ok(savedCoupon);
+//       }
+//        catch (Exception e) {
+//            Map<String, String> error = new HashMap<>();
+//            error.put("message", "Something went wrong while saving the deals.");
+//            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+    
     
 }

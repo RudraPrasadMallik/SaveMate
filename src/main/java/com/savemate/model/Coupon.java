@@ -1,6 +1,5 @@
 package com.savemate.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,12 +21,18 @@ public class Coupon {
 
     @Column(nullable = false)
     private String title;
+    
+    @Column(nullable = false)
+    private String businessName;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column
     private String discountCode;
+    
+    @Column
+    private String redirectionUrl;
 
     @Column
     private String slug;

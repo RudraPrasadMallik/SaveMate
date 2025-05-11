@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.savemate.model.Coupon;
 import com.savemate.repository.CouponRepository;
+import com.savemate.repository.DealsRepository;
 
 @Service
 public class CouponService {
 
     @Autowired
     private CouponRepository couponRepository;
+    
 
     public List<Coupon> getAllCoupons() {
         return couponRepository.findAll();
