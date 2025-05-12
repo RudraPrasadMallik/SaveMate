@@ -54,7 +54,7 @@ public class HomeController {
         return couponService.getAllCoupons();
     }
     
-    @GetMapping("/deals")
+    @GetMapping("/deal")
     public List<Deals> getAllDeals(){
     	return dealsService.getAllDeals();
     }
