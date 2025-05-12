@@ -144,18 +144,43 @@ public class AdminController {
     	return ResponseEntity.ok(deals);
     }
     
-//    @PostMapping("/createcoupons")
-//    public ResponseEntity<?> createDeals(@RequestBody Deals deals) {
-//        try {
-//         //   Deals savedCoupon = dealsService.saveCoupon(deals);
-//            return ResponseEntity.ok(savedCoupon);
-//       }
-//        catch (Exception e) {
-//            Map<String, String> error = new HashMap<>();
-//            error.put("message", "Something went wrong while saving the deals.");
-//            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @DeleteMapping("/deletedeal/{id}")
+    public ResponseEntity<String>deleteDeal(@PathVariable Long id){
+    	try {
+    		dealsService.deleteService(id);
+    		return ResponseEntity.ok("Deal has been deleted...");
+    	}
+    	catch(RuntimeException e){
+    		return ResponseEntity.status(404).body(e.getMessage());
+    		
+    	}
+    }
     
+    @PostMapping("/createdeal")
+    public ResponseEntity<?> createDeal(@RequestBody Deals deals) {
+        try {
+            Deals savedDeals = dealsService.createDeals(deals);
+            return ResponseEntity.ok(savedDeals);
+       }
+        
+        catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Something went wrong while saving the deals.");
+            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateDeal(@PathVariable Long id, @RequestBody Deals deal) {
+        try {
+            Deals updatedDeal = dealsService.updateDeals(id, deal);
+            return ResponseEntity.ok(updatedDeal);
+        } catch (RuntimeException e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", e.getMessage());
+            return ResponseEntity.status(404).body(error);
+        }
+    }  
     
 }

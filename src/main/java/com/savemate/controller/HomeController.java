@@ -3,7 +3,6 @@ package com.savemate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.savemate.model.Advertisement;
 import com.savemate.model.Coupon;
+import com.savemate.model.Deals;
 import com.savemate.model.Section;
 import com.savemate.model.SubmitCoupon;
 import com.savemate.model.SubmitMerchant;
 import com.savemate.service.AppSeoService;
 import com.savemate.service.CouponService;
+import com.savemate.service.DealsService;
 import com.savemate.service.HomeService;
 
 @RestController
@@ -27,6 +28,9 @@ public class HomeController {
     private HomeService homeService;
     @Autowired
     private CouponService couponService;
+    
+    @Autowired
+    private DealsService dealsService;
     
     @Autowired
     private AppSeoService seoService;
@@ -48,6 +52,11 @@ public class HomeController {
     @GetMapping("/coupons")
     public List<Coupon> getAllCoupons() {
         return couponService.getAllCoupons();
+    }
+    
+    @GetMapping("/deals")
+    public List<Deals> getAllDeals(){
+    	return dealsService.getAllDeals();
     }
     
 //    Get coupon & Merchant from customers
