@@ -44,7 +44,7 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private CouponService couponService;
-    
+    @Autowired
     private DealsService dealsService;
     
 

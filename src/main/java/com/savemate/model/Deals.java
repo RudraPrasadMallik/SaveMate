@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "coupons")
+@Table(name = "deals")
 public class Deals {
 	
 	
@@ -30,6 +30,5 @@ public class Deals {
 	
 	@Column
 	private String logoImgUrl;
-	
-	
+		
 }
