@@ -33,6 +33,10 @@ public class Coupon {
     
     @Column
     private String redirectionUrl;
+    
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section section;
 
     @Column
     private String slug;
