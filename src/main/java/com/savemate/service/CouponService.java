@@ -42,6 +42,4 @@ public class CouponService {
     public Page<Coupon> getCouponsBySection(String sectionName, Pageable pageable) {
         return couponRepository.findByType(sectionName, pageable);
     }
-
-    
 }
